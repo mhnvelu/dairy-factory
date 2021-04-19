@@ -2,12 +2,10 @@ package com.spring.microservices.dairyfactory.web.controller;
 
 import com.spring.microservices.dairyfactory.web.model.ButterDto;
 import com.spring.microservices.dairyfactory.web.services.ButterService;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -25,6 +23,27 @@ public class ButterController {
     @GetMapping({"/{butterId}"})
     public ResponseEntity<ButterDto> getButter(@PathVariable("butterId") UUID butterId) {
         return new ResponseEntity<>(butterService.getButterById(butterId), HttpStatus.OK);
+    }
+
+    @PostMapping()
+    public ResponseEntity saveButter(@RequestBody ButterDto butterDto) {
+        ButterDto savedButterDto = butterService.saveButter(butterDto);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Location", "/api/v1/butter/" + savedButterDto.getId().toString());
+        return new ResponseEntity(httpHeaders, HttpStatus.CREATED);
+    }
+
+    @PutMapping({"/{butterId}"})
+    public ResponseEntity updateButter(@PathVariable("butterId") UUID butterId,
+                                       @RequestBody ButterDto butterDto) {
+        butterService.updateButter(butterId, butterDto);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @DeleteMapping({"/{butterId}"})
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteButter(@PathVariable("butterId") UUID butterId) {
+        butterService.deleteById(butterId);
     }
 }
 
