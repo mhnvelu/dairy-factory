@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.*;
 import java.util.UUID;
 
 @Data
@@ -13,8 +14,15 @@ import java.util.UUID;
 @Builder
 public class ButterDto {
 
+    @Null
     private UUID id;
+
+    @NotBlank
     private String name;
+
+    @NotBlank
     private String flavour;
+
+    @Positive
     private int weightInGms;
 }

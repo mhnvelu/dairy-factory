@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 @RequestMapping("/api/v2/butter")
@@ -26,7 +27,7 @@ public class ButterControllerV2 {
     }
 
     @PostMapping()
-    public ResponseEntity saveButter(@RequestBody ButterDtoV2 butterDtoV2) {
+    public ResponseEntity saveButter(@Valid @RequestBody ButterDtoV2 butterDtoV2) {
         ButterDtoV2 savedButterDtoV2 = butterServicev2.saveButter(butterDtoV2);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Location", "/api/v2/butter/" + savedButterDtoV2.getId().toString());
@@ -35,7 +36,7 @@ public class ButterControllerV2 {
 
     @PutMapping({"/{butterId}"})
     public ResponseEntity updateButter(@PathVariable("butterId") UUID butterId,
-                                       @RequestBody ButterDtoV2 butterDtoV2) {
+                                       @Valid @RequestBody ButterDtoV2 butterDtoV2) {
         butterServicev2.updateButter(butterId, butterDtoV2);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

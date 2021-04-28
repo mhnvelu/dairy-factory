@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 @Deprecated
@@ -27,7 +28,7 @@ public class ButterController {
     }
 
     @PostMapping()
-    public ResponseEntity saveButter(@RequestBody ButterDto butterDto) {
+    public ResponseEntity saveButter(@Valid @RequestBody ButterDto butterDto) {
         ButterDto savedButterDto = butterService.saveButter(butterDto);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Location", "/api/v1/butter/" + savedButterDto.getId().toString());
@@ -36,7 +37,7 @@ public class ButterController {
 
     @PutMapping({"/{butterId}"})
     public ResponseEntity updateButter(@PathVariable("butterId") UUID butterId,
-                                       @RequestBody ButterDto butterDto) {
+                                       @Valid @RequestBody ButterDto butterDto) {
         butterService.updateButter(butterId, butterDto);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

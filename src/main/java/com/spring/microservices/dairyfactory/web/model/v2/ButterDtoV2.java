@@ -32,7 +32,7 @@ public class ButterDtoV2 {
     @NotNull
     private ButterFlavourEnum flavour;
 
-    @NotNull
+    @Positive
     private int weightInGms;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING)
@@ -48,6 +48,7 @@ public class ButterDtoV2 {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", shape = JsonFormat.Shape.STRING)
     private OffsetDateTime lastModifiedDate;
 
+    @Positive
     private Integer quantityInStock;
 
 }
