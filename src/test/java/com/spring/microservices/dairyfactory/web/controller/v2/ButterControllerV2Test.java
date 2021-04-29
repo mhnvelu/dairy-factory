@@ -33,7 +33,7 @@ class ButterControllerV2Test {
 
     ButterDtoV2 getValidButterDtoV2() {
         return ButterDtoV2.builder().name("My Butter").flavour(ButterFlavourEnum.HERB)
-                .price(new BigDecimal("2.99")).weightInGms(100).build();
+                .price(new BigDecimal("2.99")).weightInGms(100).quantityInStock(10).build();
     }
 
     @Test

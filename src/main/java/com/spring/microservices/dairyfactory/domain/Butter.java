@@ -29,7 +29,7 @@ public class Butter {
     private Long version;
 
     private String name;
-    private ButterFlavourEnum flavour;
+    private String flavour;
 
     @CreationTimestamp
     @Column(updatable = false)
