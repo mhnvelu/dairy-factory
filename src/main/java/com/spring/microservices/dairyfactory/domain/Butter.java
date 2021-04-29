@@ -1,5 +1,6 @@
 package com.spring.microservices.dairyfactory.domain;
 
+import com.spring.microservices.dairyfactory.web.model.v2.ButterFlavourEnum;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
@@ -28,7 +29,7 @@ public class Butter {
     private Long version;
 
     private String name;
-    private String flavour;
+    private ButterFlavourEnum flavour;
 
     @CreationTimestamp
     @Column(updatable = false)

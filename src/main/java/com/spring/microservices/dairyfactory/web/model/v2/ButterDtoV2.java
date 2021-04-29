@@ -33,7 +33,7 @@ public class ButterDtoV2 {
     private ButterFlavourEnum flavour;
 
     @Positive
-    private int weightInGms;
+    private Integer weightInGms;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     @Positive
