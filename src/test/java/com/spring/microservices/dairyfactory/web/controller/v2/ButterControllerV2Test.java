@@ -62,7 +62,7 @@ class ButterControllerV2Test {
         mockMvc.perform(get("/api/v2/butter/{butterId}", UUID.randomUUID().toString())
                                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andDo(document("/api/v2/butter-get",
+                .andDo(document("api/v2/butter-get",
                                 pathParameters(parameterWithName("butterId").description("UUID of desired Butter to Get")),
                                 responseFields(
                                         fieldWithPath("id").description("Id of Butter").type(UUID.class),
@@ -94,7 +94,7 @@ class ButterControllerV2Test {
         mockMvc.perform(post("/api/v2/butter/").contentType(MediaType.APPLICATION_JSON)
                                 .content(jsonPayload))
                 .andExpect(status().isCreated())
-                .andDo(document("/api/v2/butter-post",
+                .andDo(document("api/v2/butter-post",
                                 requestFields(
                                         fields.withPath("id").ignored(),
                                         fields.withPath("version").ignored(),
