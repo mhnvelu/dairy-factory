@@ -5,10 +5,13 @@ import com.spring.microservices.dairyfactory.web.model.v2.ButterDtoV2;
 import com.spring.microservices.dairyfactory.web.model.v2.ButterFlavourEnum;
 import com.spring.microservices.dairyfactory.web.services.v2.ButterServiceV2;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
@@ -16,9 +19,18 @@ import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+//import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+
+@ExtendWith(RestDocumentationExtension.class)
+@AutoConfigureRestDocs
 @WebMvcTest(ButterControllerV2.class)
 class ButterControllerV2Test {
 
@@ -41,8 +53,24 @@ class ButterControllerV2Test {
 
         given(butterServicev2.getButterById(any())).willReturn(getValidButterDtoV2());
 
-        mockMvc.perform(get("/api/v2/butter/" + UUID.randomUUID().toString())
-                                .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+        mockMvc.perform(get("/api/v2/butter/{butterId}", UUID.randomUUID().toString())
+                                .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+                .andDo(document("/api/v2/butter/",
+                                pathParameters(parameterWithName("butterId").description("UUID of desired Butter to Get")),
+                                responseFields(
+                                        fieldWithPath("id").description("Id of Butter"),
+                                        fieldWithPath("version").description("Version Number"),
+                                        fieldWithPath("name").description("Butter Name"),
+                                        fieldWithPath("weightInGms").description("Butter Weight In Gms"),
+                                        fieldWithPath("price").description("Price of Butter"),
+                                        fieldWithPath("createdDate").description("Date Created"),
+                                        fieldWithPath("lastModifiedDate").description("Date Updated"),
+                                        fieldWithPath("quantityInStock").description("Quantity of Butter in Stock"),
+                                        fieldWithPath("flavour").description("Butter Flavour")
+
+                                )
+
+                ));
     }
 
     @Test
