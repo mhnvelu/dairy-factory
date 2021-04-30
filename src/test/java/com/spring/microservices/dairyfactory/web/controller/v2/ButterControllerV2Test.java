@@ -18,7 +18,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
+import java.util.Arrays;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -62,15 +65,15 @@ class ButterControllerV2Test {
                 .andDo(document("/api/v2/butter-get",
                                 pathParameters(parameterWithName("butterId").description("UUID of desired Butter to Get")),
                                 responseFields(
-                                        fieldWithPath("id").description("Id of Butter"),
-                                        fieldWithPath("version").description("Version Number"),
+                                        fieldWithPath("id").description("Id of Butter").type(UUID.class),
+                                        fieldWithPath("version").description("Version Number").type(Integer.class),
                                         fieldWithPath("name").description("Butter Name"),
                                         fieldWithPath("weightInGms").description("Butter Weight In Gms"),
                                         fieldWithPath("price").description("Price of Butter"),
-                                        fieldWithPath("createdDate").description("Date Created"),
-                                        fieldWithPath("lastModifiedDate").description("Date Updated"),
+                                        fieldWithPath("createdDate").description("Date Created").type(OffsetDateTime.class),
+                                        fieldWithPath("lastModifiedDate").description("Date Updated").type(OffsetDateTime.class),
                                         fieldWithPath("quantityInStock").description("Quantity of Butter in Stock"),
-                                        fieldWithPath("flavour").description("Butter Flavour")
+                                        fieldWithPath("flavour").description("Butter Flavour, one of HONEY, GARLIC, HERB.").type(Enum.class)
 
                                 )
 
@@ -101,7 +104,7 @@ class ButterControllerV2Test {
                                         fields.withPath("createdDate").ignored(),
                                         fields.withPath("lastModifiedDate").ignored(),
                                         fields.withPath("quantityInStock").description("Quantity of Butter in Stock"),
-                                        fields.withPath("flavour").description("Butter Flavour")
+                                        butterFlavourField(fields)
                                 )
                 ));
     }
@@ -128,6 +131,12 @@ class ButterControllerV2Test {
                 .andExpect(status().isNoContent());
     }
 
+    private FieldDescriptor butterFlavourField(ConstrainedFields fields) {
+        String formattedEnumValues = Arrays.stream(ButterFlavourEnum.values())
+                .map(type -> String.format("`%s`", type))
+                .collect(Collectors.joining(", "));
+        return fields.withPath("flavour").description("Butter Flavour, one of " + formattedEnumValues + ".").type(Enum.class);
+    }
 
     private static class ConstrainedFields {
 
