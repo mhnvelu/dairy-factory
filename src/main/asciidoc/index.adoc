@@ -1,0 +1,53 @@
+= Dairy Factory Service Docs
+Mohanavelu Subramanian;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+
+Demonstrating how to use Spring REST Docs with JUnit 5.
+
+`ButterControllerV2Test` makes a call to a very simple service and produces these
+documentation snippets.
+
+GET BUTTER
+
+One showing how to make a request using cURL:
+
+include::{snippets}/api/v2/butter-get/curl-request.adoc[]
+
+One showing the HTTP request:
+
+include::{snippets}/api/v2/butter-get/http-request.adoc[]
+
+And one showing the HTTP response:
+
+include::{snippets}/api/v2/butter-get/http-response.adoc[]
+
+Response Body:
+include::{snippets}/api/v2/butter-get/response-body.adoc[]
+
+Response Fields:
+include::{snippets}/api/v2/butter-get/response-fields.adoc[]
+
+NEW BUTTER
+
+One showing how to make a request using cURL:
+
+include::{snippets}/api/v2/butter-post/curl-request.adoc[]
+
+One showing the HTTP request:
+
+include::{snippets}/api/v2/butter-post/http-request.adoc[]
+
+And one showing the HTTP response:
+
+include::{snippets}/api/v2/butter-post/http-response.adoc[]
+
+Response Body:
+include::{snippets}/api/v2/butter-post/response-body.adoc[]
+
+Request Fields
+include::{snippets}/api/v2/butter-post/request-fields.adoc[]
+
+Response Fields:
+include::{snippets}
