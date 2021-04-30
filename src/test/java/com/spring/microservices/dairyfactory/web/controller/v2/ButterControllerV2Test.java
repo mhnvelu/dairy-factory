@@ -21,8 +21,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -54,7 +53,8 @@ class ButterControllerV2Test {
         given(butterServicev2.getButterById(any())).willReturn(getValidButterDtoV2());
 
         mockMvc.perform(get("/api/v2/butter/{butterId}", UUID.randomUUID().toString())
-                                .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+                                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
                 .andDo(document("/api/v2/butter/",
                                 pathParameters(parameterWithName("butterId").description("UUID of desired Butter to Get")),
                                 responseFields(
@@ -83,7 +83,21 @@ class ButterControllerV2Test {
         given(butterServicev2.saveButter(any())).willReturn(butterDtoV2);
 
         mockMvc.perform(post("/api/v2/butter/").contentType(MediaType.APPLICATION_JSON)
-                                .content(jsonPayload)).andExpect(status().isCreated());
+                                .content(jsonPayload))
+                .andExpect(status().isCreated())
+                .andDo(document("/api/v2/butter",
+                                requestFields(
+                                        fieldWithPath("id").ignored(),
+                                        fieldWithPath("version").ignored(),
+                                        fieldWithPath("name").description("Butter Name"),
+                                        fieldWithPath("weightInGms").description("Butter Weight In Gms"),
+                                        fieldWithPath("price").description("Price of Butter"),
+                                        fieldWithPath("createdDate").ignored(),
+                                        fieldWithPath("lastModifiedDate").ignored(),
+                                        fieldWithPath("quantityInStock").description("Quantity of Butter in Stock"),
+                                        fieldWithPath("flavour").description("Butter Flavour")
+                                )
+                ));
     }
 
     @Test
