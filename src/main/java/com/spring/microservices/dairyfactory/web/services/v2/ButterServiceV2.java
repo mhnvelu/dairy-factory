@@ -9,7 +9,7 @@ public interface ButterServiceV2 {
 
     ButterDtoV2 saveButter(ButterDtoV2 butterDto);
 
-    void updateButter(UUID butterId, ButterDtoV2 butterDto);
+    ButterDtoV2 updateButter(UUID butterId, ButterDtoV2 butterDto);
 
     void deleteById(UUID butterId);
 }
