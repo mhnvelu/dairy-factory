@@ -4,6 +4,7 @@ import com.spring.microservices.dairyfactory.web.model.v2.ButterFlavourEnum;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ public class Butter {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @Type(type="org.hibernate.type.UUIDCharType")
     @Column(length = 36, columnDefinition = "varchar", updatable = false, nullable = false)
     private UUID id;
 
@@ -29,7 +31,7 @@ public class Butter {
     private Long version;
 
     private String name;
-    private String flavour;
+    private ButterFlavourEnum flavour;
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -38,7 +40,12 @@ public class Butter {
     @UpdateTimestamp
     private Timestamp lastModifiedDate;
 
+    @Column(unique = true)
+    private String upc;
+
+    private Integer minOnHand;
+
     private BigDecimal price;
-    private Integer quantityInStock;
+    private Integer quantityToProduce;
     private Integer weightInGms;
 }

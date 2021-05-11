@@ -51,3 +51,4 @@ ObjectMapper.
     - Annotate the test class with @ActiveProfiles("kebab")
  - If we set explicitly the property name using @JsonProperty, then this will override any naming
   strategy.
+  

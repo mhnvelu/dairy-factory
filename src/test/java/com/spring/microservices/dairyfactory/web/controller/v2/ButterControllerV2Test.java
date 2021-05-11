@@ -51,13 +51,13 @@ class ButterControllerV2Test {
 
     ButterDtoV2 getValidButterDtoV2() {
         return ButterDtoV2.builder().name("My Butter").flavour(ButterFlavourEnum.HERB)
-                .price(new BigDecimal("2.99")).weightInGms(100).quantityInStock(10).build();
+                .price(new BigDecimal("2.99")).weightInGms(100).quantityOnHand(10).upc("12345").build();
     }
 
     @Test
     void getButter() throws Exception {
 
-        given(butterServicev2.getButterById(any())).willReturn(getValidButterDtoV2());
+        given(butterServicev2.getButterById(any(), any())).willReturn(getValidButterDtoV2());
 
         mockMvc.perform(get("/api/v2/butter/{butterId}", UUID.randomUUID().toString())
                                 .accept(MediaType.APPLICATION_JSON))
@@ -70,9 +70,10 @@ class ButterControllerV2Test {
                                         fieldWithPath("name").description("Butter Name"),
                                         fieldWithPath("weightInGms").description("Butter Weight In Gms"),
                                         fieldWithPath("price").description("Price of Butter"),
+                                        fieldWithPath("upc").description("Universal Product Code"),
                                         fieldWithPath("createdDate").description("Date Created").type(OffsetDateTime.class),
                                         fieldWithPath("lastModifiedDate").description("Date Updated").type(OffsetDateTime.class),
-                                        fieldWithPath("quantityInStock").description("Quantity of Butter in Stock"),
+                                        fieldWithPath("quantityOnHand").description("Quantity of Butter in Stock"),
                                         fieldWithPath("flavour").description("Butter Flavour, one of HONEY, GARLIC, HERB.").type(Enum.class)
 
                                 )
@@ -101,9 +102,10 @@ class ButterControllerV2Test {
                                         fields.withPath("name").description("Butter Name"),
                                         fields.withPath("weightInGms").description("Butter Weight In Gms"),
                                         fields.withPath("price").description("Price of Butter"),
+                                        fields.withPath("upc").description("Universal Product Code"),
                                         fields.withPath("createdDate").ignored(),
                                         fields.withPath("lastModifiedDate").ignored(),
-                                        fields.withPath("quantityInStock").description("Quantity of Butter in Stock"),
+                                        fields.withPath("quantityOnHand").description("Quantity of Butter in Stock"),
                                         butterFlavourField(fields)
                                 )
                 ));

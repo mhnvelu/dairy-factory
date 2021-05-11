@@ -35,6 +35,9 @@ public class ButterDtoV2 {
     @Positive
     private Integer weightInGms;
 
+    @NotNull
+    private String upc;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     @Positive
     @NotNull
@@ -49,6 +52,6 @@ public class ButterDtoV2 {
     private OffsetDateTime lastModifiedDate;
 
     @Positive
-    private Integer quantityInStock;
+    private Integer quantityOnHand;
 
 }
