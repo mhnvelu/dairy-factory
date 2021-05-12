@@ -4,6 +4,7 @@
 
     <cache alias="butterCache" uses-template="config-cache"/>
     <cache alias="butterListCache" uses-template="config-cache"/>
+    <cache alias="butterUpcCache" uses-template="config-cache"/>
 
     <cache-template name="config-cache">
         <expiry>

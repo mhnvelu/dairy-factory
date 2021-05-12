@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.UUID;
 
-@RequestMapping("/api/v2/butter")
+@RequestMapping("/api/v2/")
 @RestController
 public class ButterControllerV2 {
 
@@ -27,7 +27,7 @@ public class ButterControllerV2 {
     }
 
 
-    @GetMapping({"/{butterId}"})
+    @GetMapping({"butter/{butterId}"})
     public ResponseEntity<ButterDtoV2> getButter(@PathVariable("butterId") UUID butterId, @RequestParam(value = "showInventoryOnHand", required = false) Boolean showInventoryOnHand) {
         if (showInventoryOnHand == null) {
             showInventoryOnHand = false;
@@ -40,7 +40,7 @@ public class ButterControllerV2 {
         return new ResponseEntity<>(butterServicev2.getButterByUpc(upc), HttpStatus.OK);
     }
 
-    @GetMapping(produces = {"application/json"})
+    @GetMapping(produces = {"application/json"}, path = "butter")
     public ResponseEntity<ButterPagedList> listButter(@RequestParam(value = "pageNumber", required = false) Integer pageNumber,
                                                       @RequestParam(value = "pageSize", required = false) Integer pageSize,
                                                       @RequestParam(value = "name", required = false) String name,
@@ -65,7 +65,7 @@ public class ButterControllerV2 {
     }
 
 
-    @PostMapping()
+    @PostMapping(path = "butter")
     public ResponseEntity saveButter(@Valid @RequestBody ButterDtoV2 butterDtoV2) {
         ButterDtoV2 savedButterDtoV2 = butterServicev2.saveButter(butterDtoV2);
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -73,14 +73,14 @@ public class ButterControllerV2 {
         return new ResponseEntity(httpHeaders, HttpStatus.CREATED);
     }
 
-    @PutMapping({"/{butterId}"})
+    @PutMapping({"butter/{butterId}"})
     public ResponseEntity updateButter(@PathVariable("butterId") UUID butterId,
                                        @Valid @RequestBody ButterDtoV2 butterDtoV2) {
         butterServicev2.updateButter(butterId, butterDtoV2);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping({"/{butterId}"})
+    @DeleteMapping({"butter/{butterId}"})
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteButter(@PathVariable("butterId") UUID butterId) {
         butterServicev2.deleteById(butterId);

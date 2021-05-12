@@ -10,7 +10,7 @@ public abstract class ButterMapperDecorator implements ButterMapper {
     private ButterMapper butterMapper;
 
     @Autowired
-    public void setBeerInventoryService(ButterInventoryService butterInventoryService) {
+    public void setButterInventoryService(ButterInventoryService butterInventoryService) {
         this.butterInventoryService = butterInventoryService;
     }
 

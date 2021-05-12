@@ -64,6 +64,7 @@ public class ButterServiceV2Impl implements ButterServiceV2 {
         butterRepository.deleteById(butterId);
     }
 
+    @Cacheable(cacheNames = "butterUpcCache", key = "#upc")
     @Override
     public ButterDtoV2 getButterByUpc(String upc) {
         return butterMapper.butterToButterDtoV2(butterRepository.findByUpc(upc));
