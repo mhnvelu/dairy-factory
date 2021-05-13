@@ -52,3 +52,17 @@ ObjectMapper.
  - If we set explicitly the property name using @JsonProperty, then this will override any naming
   strategy.
   
+## Maven BOM(Bill Of Materials)
+- Provides a common place to maintain all the dependencies so that all our microservices can 
+inherit.
+- Spring Parent POM is very similar to BOM. It provides us a set of dependencies and properties.
+It doesn't set common dependencies, set common plugins, set common plugin configurations. But the
+ BOM does.
+ - In our application POM, we inherit from Spring Parent POM by explicitly mentioning them.
+ - BOM Configurations:
+    - Set common maven properties
+    - Set common maven plugins and configurations
+    - Set dependency versions
+    - Set common dependencies
+    - Set common build profiles
+    - Set just any inheritable property that is common
