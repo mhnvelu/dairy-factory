@@ -21,6 +21,8 @@ import java.util.UUID;
 @Builder
 public class ButterDtoV2 implements Serializable {
 
+    static final long serialVersionUID = 1L;
+
     @Null
     private UUID id;
 
