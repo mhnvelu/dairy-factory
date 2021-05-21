@@ -28,9 +28,12 @@ public class DairyFactoryService {
         List<Butter> butterList = butterRepository.findAll();
         butterList.forEach(butter -> {
             Integer inventoryQuantityOnHand = butterInventoryServiceRestTemplate.getOnHandInventory(butter.getId());
-            log.info("Butter Name :%s, MinOnHand :%d, InventoryQuantityOnHand :%d", butter.getName(),
-                     butter.getMinOnHand(), inventoryQuantityOnHand);
+            log.info("Butter Name : " + butter.getName() + " MinOnHand : " + butter.getMinOnHand() + " InventoryQuantityOnHand " +
+                     ": " +
+                     inventoryQuantityOnHand
+            );
             if (butter.getMinOnHand() >= inventoryQuantityOnHand) {
+                log.info("Sending ProduceButterEvent for butter : " + butter.getName());
                 jmsTemplate.convertAndSend(JmsConfig.BUTTER_PRODUCE_QUEUE,
                                            new ProduceButterEvent(butterMapper.butterToButterDtoV2(butter)));
             }
