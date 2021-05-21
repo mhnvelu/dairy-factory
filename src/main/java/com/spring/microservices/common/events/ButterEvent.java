@@ -1,4 +1,4 @@
-package com.spring.microservices.dairyfactory.events;
+package com.spring.microservices.common.events;
 
 import com.spring.microservices.dairyfactory.web.model.v2.ButterDtoV2;
 import lombok.*;

@@ -2,7 +2,7 @@ package com.spring.microservices.dairyfactory.web.services;
 
 import com.spring.microservices.dairyfactory.config.JmsConfig;
 import com.spring.microservices.dairyfactory.domain.Butter;
-import com.spring.microservices.dairyfactory.events.ProduceButterEvent;
+import com.spring.microservices.common.events.ProduceButterEvent;
 import com.spring.microservices.dairyfactory.repository.ButterRepository;
 import com.spring.microservices.dairyfactory.web.mappers.ButterMapper;
 import com.spring.microservices.dairyfactory.web.services.v2.ButterInventoryServiceRestTemplateImpl;
