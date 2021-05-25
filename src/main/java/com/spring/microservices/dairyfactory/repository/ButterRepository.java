@@ -1,7 +1,7 @@
 package com.spring.microservices.dairyfactory.repository;
 
 import com.spring.microservices.dairyfactory.domain.Butter;
-import com.spring.microservices.dairyfactory.web.model.v2.ButterFlavourEnum;
+import com.spring.microservices.model.v2.ButterFlavourEnum;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,7 +1,7 @@
 package com.spring.microservices.dairyfactory.web.mappers;
 
 import com.spring.microservices.dairyfactory.domain.Customer;
-import com.spring.microservices.dairyfactory.web.model.CustomerDto;
+import com.spring.microservices.model.CustomerDto;
 import org.mapstruct.Mapper;
 
 @Mapper

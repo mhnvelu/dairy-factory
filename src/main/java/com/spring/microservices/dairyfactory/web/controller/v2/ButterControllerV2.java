@@ -1,8 +1,8 @@
 package com.spring.microservices.dairyfactory.web.controller.v2;
 
-import com.spring.microservices.dairyfactory.web.model.v2.ButterDtoV2;
-import com.spring.microservices.dairyfactory.web.model.v2.ButterFlavourEnum;
-import com.spring.microservices.dairyfactory.web.model.v2.ButterPagedList;
+import com.spring.microservices.model.v2.ButterDtoV2;
+import com.spring.microservices.model.v2.ButterFlavourEnum;
+import com.spring.microservices.model.v2.ButterPagedList;
 import com.spring.microservices.dairyfactory.web.services.v2.ButterServiceV2;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;

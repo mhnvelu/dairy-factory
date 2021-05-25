@@ -14,7 +14,7 @@ Please refer my [Notes](NOTES.md) to know about Sagas.
 A repository on Spring State Machine is available at [spring-state-machine-project](https://github.com/mhnvelu/spring-state-machine-project)
 
 ### Order Allocation Orchestration Saga
-![](Order-Allocation-Orchestration-Saga.png)
+![Order Allocation Orchestration Saga](Order-Allocation-Orchestration-Saga.png)
 
 - Saga Execution Coordinator is implemented using Spring State Machine.
 - Events:

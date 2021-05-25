@@ -1,6 +1,6 @@
-package com.spring.microservices.common.events;
+package com.spring.microservices.model.events;
 
-import com.spring.microservices.dairyfactory.web.model.v2.ButterDtoV2;
+import com.spring.microservices.model.v2.ButterDtoV2;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor

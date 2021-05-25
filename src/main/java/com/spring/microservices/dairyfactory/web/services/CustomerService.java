@@ -1,6 +1,6 @@
 package com.spring.microservices.dairyfactory.web.services;
 
-import com.spring.microservices.dairyfactory.web.model.CustomerDto;
+import com.spring.microservices.model.CustomerDto;
 
 import java.util.UUID;
 

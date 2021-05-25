@@ -1,6 +1,6 @@
 package com.spring.microservices.dairyfactory.web.services.v2;
 
-import com.spring.microservices.dairyfactory.web.model.inventory.ButterInventoryDto;
+import com.spring.microservices.model.inventory.ButterInventoryDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;

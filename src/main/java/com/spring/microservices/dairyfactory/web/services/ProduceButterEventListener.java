@@ -2,10 +2,10 @@ package com.spring.microservices.dairyfactory.web.services;
 
 import com.spring.microservices.dairyfactory.config.JmsConfig;
 import com.spring.microservices.dairyfactory.domain.Butter;
-import com.spring.microservices.common.events.NewInventoryEvent;
-import com.spring.microservices.common.events.ProduceButterEvent;
+import com.spring.microservices.model.events.NewInventoryEvent;
+import com.spring.microservices.model.events.ProduceButterEvent;
 import com.spring.microservices.dairyfactory.repository.ButterRepository;
-import com.spring.microservices.dairyfactory.web.model.v2.ButterDtoV2;
+import com.spring.microservices.model.v2.ButterDtoV2;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.annotation.JmsListener;

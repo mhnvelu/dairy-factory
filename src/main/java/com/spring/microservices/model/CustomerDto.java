@@ -1,4 +1,4 @@
-package com.spring.microservices.dairyfactory.web.model;
+package com.spring.microservices.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

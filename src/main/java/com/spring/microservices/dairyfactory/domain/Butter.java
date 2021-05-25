@@ -1,6 +1,6 @@
 package com.spring.microservices.dairyfactory.domain;
 
-import com.spring.microservices.dairyfactory.web.model.v2.ButterFlavourEnum;
+import com.spring.microservices.model.v2.ButterFlavourEnum;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;

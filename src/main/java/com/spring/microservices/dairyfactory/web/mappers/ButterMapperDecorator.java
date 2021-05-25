@@ -1,7 +1,7 @@
 package com.spring.microservices.dairyfactory.web.mappers;
 
 import com.spring.microservices.dairyfactory.domain.Butter;
-import com.spring.microservices.dairyfactory.web.model.v2.ButterDtoV2;
+import com.spring.microservices.model.v2.ButterDtoV2;
 import com.spring.microservices.dairyfactory.web.services.v2.ButterInventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 

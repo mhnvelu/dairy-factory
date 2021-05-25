@@ -1,16 +1,13 @@
 package com.spring.microservices.dairyfactory.web.controller;
 
-import com.spring.microservices.dairyfactory.web.model.CustomerDto;
+import com.spring.microservices.model.CustomerDto;
 import com.spring.microservices.dairyfactory.web.services.CustomerService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @RestController

@@ -1,4 +1,4 @@
-package com.spring.microservices.dairyfactory.web.model.v2;
+package com.spring.microservices.model.v2;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
