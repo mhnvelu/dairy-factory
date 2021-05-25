@@ -203,3 +203,43 @@ Total System loss.
   - Consistency achieved by normal execution of Saga.
   - In the event of error, consistency achieved via compensating transactions.
    
+#### Sagas coordination
+- 2 approaches for Saga coordination
+  - Choreography - Distributed decision making. Each actor decides next steps.
+    - Implementation:
+      - Implemented using events.
+      - Each actor emits an event for the next step in the Saga.
+      - Requires each actor to have logic about the Saga.
+      - Each actor needs to know how to perform a compensating transaction.
+        - Thus each actor has more coupling to other system components.
+    - Benefits:
+      - Simple loosely coupled.
+      - Good for simpler Sagas.
+    - Problems:
+      - Cyclic dependencies.
+      - Harder to understand - logic is spread out.
+      - Components are more complex.
+    
+  - Orchestration - Centralized decision making. Central component decides next steps.
+    - Step components do not decide next steps.
+    - Implementation:
+      - Central component directing other actors.
+      - Central component maintains state for the Saga:
+        - State Machine
+        - Saga Execution Coordinator
+        - Event Sourcing
+      - Must take responsibility of completion of Saga - persist state to DB, use persistent 
+      message queues, etc      
+    - Benefits:
+      - Logic is centralized and easier to understand.
+      - Reduced coupling and better separation of concerns.
+    - Problems:
+      - Risk of over centralization - need to maintain focus on separation of concerns.
+      
+- Which to use?
+  - Choreography - For smaller simple Sagas.
+  - Orchestration - For larger more complex Sagas.
+
+- How to implement?
+  - Typically custom solution - wide variety of implementations.
+  - Open Source / Commercial Solutions are emerging.
