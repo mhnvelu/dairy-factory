@@ -1,19 +1,19 @@
-package com.spring.microservices.dairyfactory.web.services;
+package com.spring.microservices.dairyfactory.services.listeners;
 
 import com.spring.microservices.dairyfactory.config.JmsConfig;
 import com.spring.microservices.dairyfactory.domain.Butter;
+import com.spring.microservices.dairyfactory.repository.ButterRepository;
 import com.spring.microservices.model.events.NewInventoryEvent;
 import com.spring.microservices.model.events.ProduceButterEvent;
-import com.spring.microservices.dairyfactory.repository.ButterRepository;
 import com.spring.microservices.model.v2.ButterDtoV2;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.core.JmsTemplate;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
+@Component
 @RequiredArgsConstructor
 @Slf4j
 public class ProduceButterEventListener {

@@ -1,7 +1,7 @@
 package com.spring.microservices.dairyfactory.web.controller;
 
 import com.spring.microservices.model.CustomerDto;
-import com.spring.microservices.dairyfactory.web.services.CustomerService;
+import com.spring.microservices.dairyfactory.services.CustomerService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

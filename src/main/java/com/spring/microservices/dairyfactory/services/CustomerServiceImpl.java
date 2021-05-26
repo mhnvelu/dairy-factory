@@ -1,4 +1,4 @@
-package com.spring.microservices.dairyfactory.web.services;
+package com.spring.microservices.dairyfactory.services;
 
 import com.spring.microservices.model.CustomerDto;
 import lombok.extern.slf4j.Slf4j;

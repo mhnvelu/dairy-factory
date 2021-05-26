@@ -3,7 +3,7 @@ package com.spring.microservices.dairyfactory.web.controller.v2;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.microservices.model.v2.ButterDtoV2;
 import com.spring.microservices.model.v2.ButterFlavourEnum;
-import com.spring.microservices.dairyfactory.web.services.v2.ButterServiceV2;
+import com.spring.microservices.dairyfactory.services.v2.ButterServiceV2;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

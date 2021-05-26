@@ -1,4 +1,4 @@
-package com.spring.microservices.dairyfactory.web.services.v2;
+package com.spring.microservices.dairyfactory.services.v2;
 
 import com.spring.microservices.dairyfactory.domain.Butter;
 import com.spring.microservices.dairyfactory.repository.ButterRepository;

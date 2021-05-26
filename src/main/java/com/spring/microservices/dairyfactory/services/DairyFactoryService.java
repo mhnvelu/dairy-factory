@@ -1,11 +1,11 @@
-package com.spring.microservices.dairyfactory.web.services;
+package com.spring.microservices.dairyfactory.services;
 
 import com.spring.microservices.dairyfactory.config.JmsConfig;
 import com.spring.microservices.dairyfactory.domain.Butter;
 import com.spring.microservices.model.events.ProduceButterEvent;
 import com.spring.microservices.dairyfactory.repository.ButterRepository;
 import com.spring.microservices.dairyfactory.web.mappers.ButterMapper;
-import com.spring.microservices.dairyfactory.web.services.v2.ButterInventoryServiceRestTemplateImpl;
+import com.spring.microservices.dairyfactory.services.v2.ButterInventoryServiceRestTemplateImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.core.JmsTemplate;

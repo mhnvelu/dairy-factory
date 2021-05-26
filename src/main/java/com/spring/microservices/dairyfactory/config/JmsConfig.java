@@ -12,6 +12,8 @@ public class JmsConfig {
 
     public static final String BUTTER_PRODUCE_QUEUE = "butter-produce-queue";
     public static final String NEW_INVENTORY_QUEUE = "new-inventory-queue";
+    public static final String BUTTER_ORDER_VALIDATE_REQUEST_QUEUE = "validate-order-request-queue";
+    public static final String BUTTER_ORDER_VALIDATE_RESPONSE_QUEUE = "validate-order-response-queue";
 
     @Bean
     public MessageConverter jacksonJmsMessageConverter(ObjectMapper objectMapper) {

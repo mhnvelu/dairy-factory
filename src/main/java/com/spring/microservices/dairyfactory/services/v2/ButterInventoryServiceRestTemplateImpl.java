@@ -1,4 +1,4 @@
-package com.spring.microservices.dairyfactory.web.services.v2;
+package com.spring.microservices.dairyfactory.services.v2;
 
 import com.spring.microservices.model.inventory.ButterInventoryDto;
 import lombok.extern.slf4j.Slf4j;
