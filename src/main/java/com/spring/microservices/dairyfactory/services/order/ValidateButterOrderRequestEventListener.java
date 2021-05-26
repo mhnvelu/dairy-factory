@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @Slf4j
@@ -18,7 +17,6 @@ public class ValidateButterOrderRequestEventListener {
     private final JmsTemplate jmsTemplate;
     private final ButterOrderValidator butterOrderValidator;
 
-    @Transactional
     @JmsListener(destination = JmsConfig.BUTTER_ORDER_VALIDATE_REQUEST_QUEUE)
     public void listenValidationButterOrderRequest(ValidateButterOrderRequestEvent validateButterOrderRequestEvent) {
         boolean isValid = butterOrderValidator.validOrder(validateButterOrderRequestEvent.getButterOrderDto());
