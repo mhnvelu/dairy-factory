@@ -273,3 +273,22 @@ hidden.
 
 ![Reactive Gateway](Reactive-Gateway.png) 
 ![Gateway Flow](Gateway-Flow.png)
+
+## Netflix Eureka
+- It is a Service Discovery and Registration Service
+  - Service Registration
+    - When a microservice instance starts, it registers itself with Eureka service
+    - Provides host name, IP, port and service name
+    - Spring Boot provides a starter for Eureka server and Eureka client
+    - Both server and client will self configure for localhost properties
+    - Important to configure service name in application.properties. This value is used to lookup
+     the service in Eureka.
+  - Service Discovery
+    - Process of discovering the available service instances   
+    - Spring Cloud Open Feign allows for easy service discovery between services. Works in 
+    conjunction with Eureka and Ribbon.
+    - Spring Cloud Gateway can be configured to lookup services in Eureka. Works in conjunction 
+    with Ribbon to load balance requests. 
+![Netflix-Eureka](Netflix-Eureka.png)
+![API-Gateway-Ribbon-Eureka](API-Gateway-Ribbon.png)
+![Netflix-Eureka-Flow](Netflix-Eureka-Flow.png)

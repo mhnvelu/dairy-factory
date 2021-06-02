@@ -23,3 +23,11 @@ A repository on Spring State Machine is available at [spring-state-machine-proje
 - States:
   - NEW, VALIDATED, VALIDATION_EXCEPTION, ALLOCATED, ALLOCATION_ERROR, PENDING_INVENTORY, 
   PICKED_UP, DELIVERED, DELIVERY_EXCEPTION, CANCELLED
+
+### Running dairy factory microservices project
+- Run the mysql container 1 [MySQL Docker](https://hub.docker.com/_/mysql)
+  - docker run -d mysql
+  - Connect to the mysql server and manually execute the script [mysql-init.sql](src/main/resources/scripts/mysql-init.sql). 
+    This script creates the DB, DB User and Password.
+- Run the JMS container
+  - docker run -p 8161:8161 -p 8162:61616 vromero/activemq-artemis
