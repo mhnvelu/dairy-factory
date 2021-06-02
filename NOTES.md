@@ -243,3 +243,33 @@ Total System loss.
 - How to implement?
   - Typically custom solution - wide variety of implementations.
   - Open Source / Commercial Solutions are emerging.
+  
+## Spring Cloud Gateway
+### APIGateway
+- Clients connect to APIGateway seamlessly and the implementation details of the services are 
+hidden.
+- APIGateway -> Multiple Load Balancers -> Each LB handles requests for specific microservice.
+- Responsibilities:
+  - Routing/ Dynamic Routing
+  - Security
+  - Rate Limiting
+  - Monitoring/Logging
+  - Blue/Green Deployments
+  - Caching
+  - Monolith Strangling
+- Types of APIGateways
+  - Appliances/Hardware - Example: F5
+  - SAAS (Software As A Service) - Example: AWS ELB
+  - Web Servers - Configured as Proxies
+  - Developer Oriented - Example: Zuul (Netflix) or Spring Cloud APIGateway
+  Note : Types can be combined 
+  
+### Spring Cloud Gateway Features
+- Java 8+, Spring Framework 5, Spring Boot 2, project Reactor
+- Non-blocking, HTTP 2 support, Netty
+- Dynamic Routing
+- Route Mapping on HTTP Request attributes
+- Filters for HTTP Request and Response
+
+![Reactive Gateway](Reactive-Gateway.png) 
+![Gateway Flow](Gateway-Flow.png)
