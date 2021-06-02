@@ -2,10 +2,10 @@ package com.spring.microservices.dairyfactory.services;
 
 import com.spring.microservices.dairyfactory.config.JmsConfig;
 import com.spring.microservices.dairyfactory.domain.Butter;
-import com.spring.microservices.model.events.ProduceButterEvent;
 import com.spring.microservices.dairyfactory.repository.ButterRepository;
+import com.spring.microservices.dairyfactory.services.v2.ButterInventoryService;
 import com.spring.microservices.dairyfactory.web.mappers.ButterMapper;
-import com.spring.microservices.dairyfactory.services.v2.ButterInventoryServiceRestTemplateImpl;
+import com.spring.microservices.model.events.ProduceButterEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.core.JmsTemplate;
@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class DairyFactoryService {
-    private final ButterInventoryServiceRestTemplateImpl butterInventoryServiceRestTemplate;
+    private final ButterInventoryService butterInventoryService;
     private final ButterRepository butterRepository;
     private final JmsTemplate jmsTemplate;
     private final ButterMapper butterMapper;
@@ -27,7 +27,7 @@ public class DairyFactoryService {
     public void checkForLowInventory() {
         List<Butter> butterList = butterRepository.findAll();
         butterList.forEach(butter -> {
-            Integer inventoryQuantityOnHand = butterInventoryServiceRestTemplate.getOnHandInventory(butter.getId());
+            Integer inventoryQuantityOnHand = butterInventoryService.getOnHandInventory(butter.getId());
             log.info("Butter Name : " + butter.getName() + " MinOnHand : " + butter.getMinOnHand() + " InventoryQuantityOnHand " +
                      ": " +
                      inventoryQuantityOnHand
