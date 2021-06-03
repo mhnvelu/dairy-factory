@@ -2,19 +2,28 @@
 ![CircleCI](https://circleci.com/gh/mhnvelu/dairy-factory.svg?style=svg) (https://app.circleci.com/pipelines/github/mhnvelu/dairy-factory)
 
 Spring Boot Microservices with Spring Cloud
+----------
+## Block Diagram
+![Block-Diagram](images/Block-Diagram.png)
 
-Three microservices have been implemented.
+
+Below microservices have been implemented.
 
 - [dairy-factory](https://github.com/mhnvelu/dairy-factory)
 - [dairy-factory-order-service](https://github.com/mhnvelu/dairy-factory-order-service)
 - [dairy-factory-inventory-service](https://github.com/mhnvelu/dairy-factory-inventory-service)
+- [dairy-factory-inventory-failover-service](https://github.com/mhnvelu/dairy-factory-inventory-failover-service)
+- [dairy-factory-gateway](https://github.com/mhnvelu/dairy-factory-gateway)
+- [dairy-factory-eureka-server](https://github.com/mhnvelu/dairy-factory-eureka-server)
+- [dairy-factory-config](https://github.com/mhnvelu/dairy-factory-config)
+- [dairy-factory-config-server](https://github.com/mhnvelu/dairy-factory-config-server)
 
-Please refer my [Notes](NOTES.md) to know about Sagas.
+Please refer my [Notes](NOTES.md) to know about Sagas, Spring Cloud projects
 
 A repository on Spring State Machine is available at [spring-state-machine-project](https://github.com/mhnvelu/spring-state-machine-project)
 
 ### Order Allocation Orchestration Saga
-![Order Allocation Orchestration Saga](Order-Allocation-Orchestration-Saga.png)
+![Order Allocation Orchestration Saga](images/Order-Allocation-Orchestration-Saga.png)
 
 - Saga Execution Coordinator is implemented using Spring State Machine.
 - Events:

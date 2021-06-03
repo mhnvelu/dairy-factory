@@ -141,7 +141,7 @@ It doesn't set common dependencies, set common plugins, set common plugin config
 - Partition Tolerance - System Continues in lieu of communications errors or delays.
 
 CAP Theorem states a Distributed System can only maintain 2 of 3.
-![CAP Theorem](CAP-Theorem.png)
+![CAP Theorem](images/CAP-Theorem.png)
 
 #### BASE - An ACID Alternative
 - BASE - Basically Available, Soft State, Eventually Consistent.
@@ -271,8 +271,8 @@ hidden.
 - Route Mapping on HTTP Request attributes
 - Filters for HTTP Request and Response
 
-![Reactive Gateway](Reactive-Gateway.png) 
-![Gateway Flow](Gateway-Flow.png)
+![Reactive Gateway](images/Reactive-Gateway.png) 
+![Gateway Flow](images/Gateway-Flow.png)
 
 ## Netflix Eureka
 - It is a Service Discovery and Registration Service
@@ -289,9 +289,9 @@ hidden.
     conjunction with Eureka and Ribbon.
     - Spring Cloud Gateway can be configured to lookup services in Eureka. Works in conjunction 
     with Ribbon to load balance requests. 
-![Netflix-Eureka](Netflix-Eureka.png)
-![API-Gateway-Ribbon-Eureka](API-Gateway-Ribbon.png)
-![Netflix-Eureka-Flow](Netflix-Eureka-Flow.png)
+![Netflix-Eureka](images/Netflix-Eureka.png)
+![API-Gateway-Ribbon-Eureka](images/API-Gateway-Ribbon.png)
+![Netflix-Eureka-Flow](images/Netflix-Eureka-Flow.png)
 
 ## Spring Cloud Circuit Breaker
 - Circuit Breaker Pattern allows us to recover from errors
@@ -309,3 +309,29 @@ Breaker implementations. Thus our source code is not tied to specific implementa
 - Gateway filters are used on top of the Spring Cloud Circuit Breaker APIs
 - Netflix has placed Hystrix into maintenance mode. Spring suggests using Resilience4J.
 
+## Spring Cloud Config
+- **Spring Cloud Config Server**
+- Provides externalized configuration for distributed environments
+- provides RESTFul style API for Spring services to lookup configuration values
+- Spring Boot Applications on startup obtain configuration values from Spring Cloud Config Server
+- Properties can be global, application specific, profile specific
+- Easily encrypt and decrypt properties
+- Config server is a traditional spring mvc application
+- Config server registers with Eureka server
+- **Spring Cloud Config property Storage** options:
+  - Git(Default) or SVN
+  - File System
+  - HashCorp's Vault
+  - JDBC, Redis
+  - AWS S3
+  - CredHub 
+- **Spring Cloud Config Client**
+  - Spring Cloud Config client by default looks for a URL property
+  - *spring.cloud.config.url* - default is http://localhost:8888
+  - If using discovery client, client will look for service called **configserver**
+  - Fail fast - optionally configure client to fail with exception if config server cannot be 
+  reached
+- Configuration resources:
+  - application = spring.application.name
+  - profile = Spring active profiles
+  - label = spring.cloud.config.label
