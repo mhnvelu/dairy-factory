@@ -50,4 +50,6 @@ A repository on Spring State Machine is available at [spring-state-machine-proje
 - Run Zipkin container
   - docker run -d -p 9411:9411 openzipkin/zipkin
   - The UI is available at http://localhost:9411/zipkin/
-  
+
+### Zipkin Distributed Tracing
+![zipkin-tracing-report](images/zipkin-tracing-report.JPG)
