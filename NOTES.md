@@ -292,3 +292,20 @@ hidden.
 ![Netflix-Eureka](Netflix-Eureka.png)
 ![API-Gateway-Ribbon-Eureka](API-Gateway-Ribbon.png)
 ![Netflix-Eureka-Flow](Netflix-Eureka-Flow.png)
+
+## Spring Cloud Circuit Breaker
+- Circuit Breaker Pattern allows us to recover from errors
+- If the service is unavailable or has unrecoverable errors, we can specify an alternative action
+ using Circuit Breaker Pattern
+- Services need to be durable in microservices environment
+- Spring Cloud Circuit Breaker is a project which provides abstractions across several Circuit 
+Breaker implementations. Thus our source code is not tied to specific implementation.
+- Supported Circuit Breaker Implementations:
+  - Netflix Hystrix
+  - Resilience4J
+  - Sentinel
+  - Spring Retry
+- Spring Cloud Gateway supports Netflix Hystrix and Resilience4J
+- Gateway filters are used on top of the Spring Cloud Circuit Breaker APIs
+- Netflix has placed Hystrix into maintenance mode. Spring suggests using Resilience4J.
+

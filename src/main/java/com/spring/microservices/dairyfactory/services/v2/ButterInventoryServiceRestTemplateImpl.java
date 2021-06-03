@@ -21,6 +21,7 @@ import java.util.UUID;
 @Profile("!local-service-discovery")
 public class ButterInventoryServiceRestTemplateImpl implements ButterInventoryService {
     public static final String INVENTORY_PATH = "/api/v1/butter/{butterId}/inventory";
+    public static final String INVENTORY_FAILOVER_SERVICE_PATH = "/inventory-failover";
     private final RestTemplate restTemplate;
 
     private String dairyFactoryInventoryServiceHost;
