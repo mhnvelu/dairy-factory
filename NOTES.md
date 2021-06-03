@@ -335,3 +335,46 @@ Breaker implementations. Thus our source code is not tied to specific implementa
   - application = spring.application.name
   - profile = Spring active profiles
   - label = spring.cloud.config.label
+  
+## Spring Cloud Sleuth
+ **Distributed Tracing :**
+- Transactions in microservices can span many services/instances and even data centers.
+- Distributed tracing provides the tools to trace the transaction across services and nodes.
+- Distributed tracing is used for 2 aspects:
+  - Performance monitoring across steps
+  - Logging / troubleshooting
+ 
+ **Spring Cloud Sleuth :**
+- Distributed tracing tool for Spring Cloud.
+- Conceptually what happens:
+  - Headers on HTTP requests or messages are enhanced with trace data
+  - Logging is enhanced with trace data
+  - Optionally trace data can be reported to **Zipkin**
+ 
+ **Tracing Terminology :**
+- Spring Cloud Sleuth uses terminology established by **Dapper**
+- Dapper is the distributed tracing system created by Google for their productions systems
+- **Span** - is a basic unit of work. Typically a send and receive of a message
+- **Trace** - A set of spans for a transaction
+- **cs / sr** - Client Sent / Server Received - aka the request
+- **ss / cr** - Server Sent / Client Received - aka the response
+
+ **Zipkin Server :**
+- Zipkin is an open source project used to report distributed tracing metrics
+- Information can be reported to Zipkin via HTTP or Kafka or RabbitMQ
+- Zipkin is a Spring MVC project
+  - Recommended to use binary distribution or docker image
+  - Building your own is not supported
+- Uses in-memory DB for development
+- Cassandra or ElasticSearch should be used for production
+- [Zipkin Docker image](https://hub.docker.com/r/openzipkin/zipkin)  
+
+ **Logging Output :**
+- LOG_LEVEL [Appname, TraceId, SpanId, Exportable]
+- Exportable - should span be exported to Zipkin? (Programmatic configuration option) 
+
+ **Logging Configuration :**
+- Microservices typically will use consolidated logging
+- Number of approaches available - its highly dependent on deployment environment
+- To support consolidated logging, log data should be available in JSON
+- Spring Boot by default uses logback, which is easy to configure for JSON output 

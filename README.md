@@ -33,10 +33,21 @@ A repository on Spring State Machine is available at [spring-state-machine-proje
   - NEW, VALIDATED, VALIDATION_EXCEPTION, ALLOCATED, ALLOCATION_ERROR, PENDING_INVENTORY, 
   PICKED_UP, DELIVERED, DELIVERY_EXCEPTION, CANCELLED
 
-### Running dairy factory microservices project
-- Run the mysql container 1 [MySQL Docker](https://hub.docker.com/_/mysql)
+### Manually Running dairy factory microservices project
+- Run the mysql container  [MySQL Docker](https://hub.docker.com/_/mysql)
   - docker run -d mysql
   - Connect to the mysql server and manually execute the script [mysql-init.sql](src/main/resources/scripts/mysql-init.sql). 
     This script creates the DB, DB User and Password.
 - Run the JMS container
   - docker run -p 8161:8161 -p 8162:61616 vromero/activemq-artemis
+- Run dairy-factory-eureka-server. It binds to port **8761**
+- Run dairy-factory-config-server. It binds to port **8888**
+- Run dairy-factory with profiles ``local-service-discovery,local``. It binds to port **8080**
+- Run dairy-factory-order-service with profiles ``local-service-discovery,local``. It binds to port **8081**
+- Run dairy-factory-inventory-service with profiles ``local-service-discovery,local``. It binds to port **8082**
+- Run dairy-factory-inventory-failover-service with profiles ``local-service-discovery``. It binds to port **8083**
+- Run dairy-factory-gateway with profiles ``local-service-discovery``. It binds to port **9090**
+- Run Zipkin container
+  - docker run -d -p 9411:9411 openzipkin/zipkin
+  - The UI is available at http://localhost:9411/zipkin/
+  
