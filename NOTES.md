@@ -378,3 +378,15 @@ Breaker implementations. Thus our source code is not tied to specific implementa
 - Number of approaches available - its highly dependent on deployment environment
 - To support consolidated logging, log data should be available in JSON
 - Spring Boot by default uses logback, which is easy to configure for JSON output 
+
+## Spring Cloud Security
+- Spring Cloud configuration will store encrypted properties as:
+  - {cipher}<your encrypted value here>
+- When Spring Cloud Config client requests an encrypted property, the value is decrypted and 
+presented to the client.
+- Must set a symmetric key in the property ``encrypt.key`` - should prefer setting this as 
+environment variable
+- Asymmetric (public/private) keys are also supported.
+- Spring Cloud Config provides endpoints for property encryption/decryption
+  - POST  /encrypt => will encrypt body of post
+  - POST  /decrypt => will decrypt body of post  
