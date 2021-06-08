@@ -389,4 +389,24 @@ environment variable
 - Asymmetric (public/private) keys are also supported.
 - Spring Cloud Config provides endpoints for property encryption/decryption
   - POST  /encrypt => will encrypt body of post
-  - POST  /decrypt => will decrypt body of post  
+  - POST  /decrypt => will decrypt body of post 
+  
+## Consolidated Logging using ELK
+- E - Elasticsearch
+- L - Logstash
+- K - kibana
+- Elasticsearch - JSON based search engine based on Lucene
+- Highly Scalable - 100s of nodes
+- Logstash:
+  - Data processing pipeline for log data
+  - Allows to collect from multiple sources, Transform, Send
+- Kibana:
+  - Data visualization tool for Elasticsearch
+- Filebeat:
+  - Its a log shipper
+  - Moves log data to destination
+  - Destination is often Logstash server
+  - Logstash is used for further transformation before sending to Elasticsearch
+  - Filebeat has ability to do some transformations. Its possible to skip Logstash and write 
+  directly to ES.
+  

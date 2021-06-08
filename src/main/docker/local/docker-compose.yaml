@@ -1,0 +1,167 @@
+version: '3.8'
+services:
+  elasticsearch:
+    image: elasticsearch
+    ports:
+      - 9200:9200
+    environment:
+      discovery.type: single-node
+
+  kibana:
+    image: kibana
+    ports:
+      - 5601:5601
+    depends_on:
+      - elasticsearch
+
+  filebeat:
+    image: elastic/filebeat
+    volumes:
+      - ./filebeat/filebeat.docker.yml:/usr/share/filebeat/filebeat.yml:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    user: root
+    restart: on-failure
+
+  jms:
+    image: vromero/activemq-artemis
+    ports:
+      - 8161:8161
+      - 8162:61616
+
+  mysql:
+    image: mysql:8.0
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: shroot
+    volumes:
+      - "../../resources/scripts/mysql-init.sql:/docker-entrypoint-initdb.d/mysql-init.sql"
+
+  zipkin:
+    image: openzipkin/zipkin
+    ports:
+      - 9411:9411
+
+  eureka:
+    image: mhnvelu/dairy-factory-eureka-server
+    ports:
+      - 8761:8761
+
+  config-server:
+    image: mhnvelu/dairy-factory-config-server
+    ports:
+      - 8888:8888
+    depends_on:
+      - eureka
+    links:
+      - eureka
+    environment:
+      - JAVA_OPTS=
+        -DEUREKA_SERVER=http://eureka:8761/eureka
+        -Deureka.instance.prefer-ip-address=true
+    restart: on-failure
+
+  inventory-service:
+    image: mhnvelu/dairy-factory-inventory-service
+    ports:
+      - 8082:8082
+    depends_on:
+      - eureka
+      - config-server
+      - jms
+      - mysql
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/
+      SPRING_PROFILES_ACTIVE: local-service-discovery,localmysql
+      SPRING_ZIPKIN_BASEURL: http://zipkin
+      SPRING_ARTEMIS_HOST: jms
+      SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3306/dairyfactoryinventoryservice?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
+    restart: on-failure
+    labels:
+      collect_logs_with_filebeat: "true"
+      decode_log_event_to_json_object: "true"
+
+  inventory-failover-service:
+    image: mhnvelu/dairy-factory-inventory-failover-service
+    ports:
+      - 8083:8083
+    depends_on:
+      - eureka
+      - config-server
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/
+      SPRING_PROFILES_ACTIVE: local-service-discovery
+      SPRING_ZIPKIN_BASEURL: http://zipkin
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
+    restart: on-failure
+    labels:
+      collect_logs_with_filebeat: "true"
+      decode_log_event_to_json_object: "true"
+
+  dairy-factory-service:
+    image: mhnvelu/dairy-factory
+    ports:
+      - 8080:8080
+    depends_on:
+      - eureka
+      - config-server
+      - jms
+      - mysql
+      - inventory-service
+      - inventory-failover-service
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/
+      MICROSERVICES_HOST_DAIRYFACTORYINVENTORYSERVICEHOST: http://inventory_service:8082
+      SPRING_PROFILES_ACTIVE: local-service-discovery,localmysql
+      SPRING_ZIPKIN_BASEURL: http://zipkin
+      SPRING_ARTEMIS_HOST: jms
+      SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3306/dairyfactoryservice?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
+    restart: on-failure
+    labels:
+      collect_logs_with_filebeat: "true"
+      decode_log_event_to_json_object: "true"
+
+  order-service:
+    image: mhnvelu/dairy-factory-order-service
+    ports:
+      - 8081:8081
+    depends_on:
+      - eureka
+      - config-server
+      - jms
+      - mysql
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/
+      DAIRY_FACTORY_BUTTER_SERVICE_HOST: http://dairy_factory_service:8080
+      SPRING_PROFILES_ACTIVE: local-service-discovery,localmysql
+      SPRING_ZIPKIN_BASEURL: http://zipkin
+      SPRING_ARTEMIS_HOST: jms
+      SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3306/dairyfactoryorderservice?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
+    restart: on-failure
+    labels:
+      collect_logs_with_filebeat: "true"
+      decode_log_event_to_json_object: "true"
+
+  apigateway:
+    image: mhnvelu/dairy-factory-gateway
+    ports:
+      - 9090:9090
+    depends_on:
+      - eureka
+      - config-server
+      - inventory-service
+      - inventory-failover-service
+      - dairy-factory-service
+      - order-service
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/
+      SPRING_PROFILES_ACTIVE: local-service-discovery
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
+    restart: on-failure
+    labels:
+      collect_logs_with_filebeat: "true"
+      decode_log_event_to_json_object: "true"
